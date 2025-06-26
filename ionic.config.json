@@ -1,0 +1,7 @@
+{
+  "name": "Mascotask2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
