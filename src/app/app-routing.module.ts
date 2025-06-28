@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/authen.guard';
 
 const routes: Routes = [
   {
@@ -9,11 +10,13 @@ const routes: Routes = [
   },
   {
     path: 'habitos',
-    loadChildren: () => import('./pages/habitos/habitos.module').then( m => m.HabitosPageModule)
+    loadChildren: () => import('./pages/habitos/habitos.module').then( m => m.HabitosPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -21,19 +24,23 @@ const routes: Routes = [
   },
   {
     path: 'mascota',
-    loadChildren: () => import('./pages/mascota/mascota.module').then( m => m.MascotaPageModule)
+    loadChildren: () => import('./pages/mascota/mascota.module').then( m => m.MascotaPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'progreso',
-    loadChildren: () => import('./pages/progreso/progreso.module').then( m => m.ProgresoPageModule)
+    loadChildren: () => import('./pages/progreso/progreso.module').then( m => m.ProgresoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'tabs',
-    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
+    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
+    canActivate: [AuthGuard]
   },
 ];
 

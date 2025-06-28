@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 
+import { AuthenService } from 'src/app/services/authen.service';
+
 @Component({
   selector: 'app-cerrar-sesion',
   templateUrl: './cerrar-sesion.component.html',
@@ -8,14 +10,15 @@ import { ModalController, NavController } from '@ionic/angular';
   standalone: false,
 })
 export class CerrarSesionComponent {
-  constructor(private modalCtrl: ModalController, private navCtrl: NavController) {}
+  constructor(private modalCtrl: ModalController, private navCtrl: NavController,private authService: AuthenService) {}
 
-  dismiss() {
+  async dismiss() {
     this.modalCtrl.dismiss();
   }
 
-  confirmar() {
-    this.modalCtrl.dismiss();
-    this.navCtrl.navigateRoot('/login');
+  async confirmar() {
+    await this.authService.logout();              
+    await this.modalCtrl.dismiss();               
+    this.navCtrl.navigateRoot('/login');         
   }
 }

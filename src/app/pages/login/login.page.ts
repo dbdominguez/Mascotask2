@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 
+import { AuthenService } from 'src/app/services/authen.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -12,7 +14,7 @@ import { LoadingController } from '@ionic/angular';
 export class LoginPage {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private loadingCtrl: LoadingController) {
+  constructor(private fb: FormBuilder, private router: Router, private loadingCtrl: LoadingController, private authService: AuthenService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       clave: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!?@#$%^&*.,_~+=-])[A-Za-z\d!?@#$%^&*.,_~+=-]{8,12}$/)]]
@@ -41,12 +43,13 @@ export class LoginPage {
 
       await loading.present();
 
+    //Guardar sesión antes de redirigir
+      await this.authService.login(correo);
+
       setTimeout(() => {
         const navigationExtras: NavigationExtras = {
-          state: {
-            correo: correo
-          }
-        }; 
+          state: { correo: correo }
+        };
         this.router.navigate(['/tabs/home'], navigationExtras);
       }, 1500);
 
