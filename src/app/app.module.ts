@@ -8,12 +8,17 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+//Storage
 import { IonicStorageModule } from '@ionic/storage-angular';
+//API
+import { provideHttpClient } from '@angular/common/http';
+
 
 // Importar modales
 import { EditarPerfilComponent } from './modals/editar-perfil/editar-perfil.component';
 import { ConfiguracionComponent } from './modals/configuracion/configuracion.component';
 import { CerrarSesionComponent } from './modals/cerrar-sesion/cerrar-sesion.component';
+import { LogrosComponent } from './modals/logros/logros.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -21,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     EditarPerfilComponent,
     ConfiguracionComponent,
-    CerrarSesionComponent
+    CerrarSesionComponent,
+    LogrosComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,7 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     IonicStorageModule.forRoot()
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideHttpClient()],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -10,9 +10,15 @@
 <ion-content class="ion-padding">
 
   <div class="ion-text-center">
-    <ion-avatar class="perfil-avatar">
-      <img src="../../assets/icon/profileicon.png" alt="Perfil">
+    <ion-avatar class="perfil-avatar" (click)="tomarFoto()">
+      <img *ngIf="fotoPerfil; else imagenDefecto" [src]="fotoPerfil" />
     </ion-avatar>
+
+    <ng-template #imagenDefecto>
+      <img src="../../assets/icon/profileicon.png" alt="Perfil" />
+    </ng-template>
+
+    <ion-text color="medium" class="text-sm">Toca la imagen para actualizar tu foto</ion-text>
 
     <h2 class="ion-text-center">{{ perfil.nombre }}</h2>
 

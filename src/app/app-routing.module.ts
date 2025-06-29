@@ -42,6 +42,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'extras',
+    loadChildren: () => import('./pages/extras/extras.module').then( m => m.ExtrasPageModule)
+  },
 ];
 
 @NgModule({

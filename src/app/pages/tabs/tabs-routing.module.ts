@@ -28,6 +28,11 @@ const routes: Routes = [
           import('../mascota/mascota.module').then(m => m.MascotaPageModule),
       },
       {
+        path: 'extras',
+        loadChildren: () =>
+          import('../extras/extras.module').then(m => m.ExtrasPageModule),
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'

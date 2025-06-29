@@ -4,6 +4,9 @@ import { EditarPerfilComponent } from 'src/app/modals/editar-perfil/editar-perfi
 import { ConfiguracionComponent } from 'src/app/modals/configuracion/configuracion.component';
 import { CerrarSesionComponent } from 'src/app/modals/cerrar-sesion/cerrar-sesion.component';
 
+//Camara
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -48,6 +51,20 @@ export class ProfilePage {
   genero: ''
 };
 
+  fotoPerfil: string = '';
+
+  async tomarFoto() {
+    const image = await Camera.getPhoto({
+      quality: 80,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Camera
+    });
+
+    this.fotoPerfil = image.dataUrl!;
+    localStorage.setItem('fotoPerfil', this.fotoPerfil);
+  }
+
   ionViewWillEnter() {
   console.log('actualizando perfil');
   const guardado = localStorage.getItem('perfilUsuario');
@@ -57,7 +74,10 @@ export class ProfilePage {
     this.perfil.fechaNacimiento = datos.fechaNacimiento || '';
     this.perfil.correo = datos.correo || '';
     this.perfil.genero = datos.genero || '';
+    this.fotoPerfil = localStorage.getItem('fotoPerfil') || '';
   }
 }
+
+
 
 }
